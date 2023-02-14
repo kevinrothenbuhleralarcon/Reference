@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -43,7 +44,7 @@ public class GradeController {
     public ResponseEntity<Grade> saveGrade(
             @PathVariable final Long studentId,
             @PathVariable final Long courseId,
-            @RequestBody final Grade grade
+            @RequestBody @Valid final Grade grade
     ) {
         return new ResponseEntity<>(gradeService.saveGrade(grade, studentId, courseId), HttpStatus.CREATED);
     }
@@ -52,7 +53,7 @@ public class GradeController {
     public ResponseEntity<Grade> updateGrade(
             @PathVariable final Long studentId,
             @PathVariable final Long courseId,
-            @RequestBody final Grade grade
+            @RequestBody @Valid final Grade grade
     ) {
         return new ResponseEntity<>(gradeService.updateGrade(grade.getScore(), studentId, courseId), HttpStatus.OK);
     }

@@ -15,6 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,10 +34,12 @@ public class Student {
     private Long id;
 
     @NonNull
+    @NotBlank(message = "Name cannot be blank")
     @Column(nullable = false)
     private String name;
 
     @NonNull
+    @Past(message = "The birth date must be in the past")
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 

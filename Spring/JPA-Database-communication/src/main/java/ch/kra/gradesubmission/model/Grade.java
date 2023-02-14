@@ -1,5 +1,6 @@
 package ch.kra.gradesubmission.model;
 
+import ch.kra.gradesubmission.validation.Score;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Score
     @Column(nullable = false)
     private String score;
 

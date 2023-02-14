@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -28,10 +29,12 @@ public class Course {
     private Long id;
 
     @NonNull
+    @NotBlank(message = "Subject cannot be blank")
     @Column(nullable = false)
     private String subject;
 
     @NonNull
+    @NotBlank(message = "Course code cannot be blank")
     @Column(
             nullable = false,
             unique = true // Indicate that we cannot have 2 courses with the same code
@@ -39,6 +42,7 @@ public class Course {
     private String code;
 
     @NonNull
+    @NotBlank(message = "Description cannot be blank")
     @Column(nullable = false)
     private String description;
 
