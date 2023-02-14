@@ -1,24 +1,22 @@
 package ch.kra.gradesubmission.service;
 
-import java.util.List;
-
 import ch.kra.gradesubmission.exception.GradeNotFoundException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Grade;
 import ch.kra.gradesubmission.model.Student;
-import ch.kra.gradesubmission.repository.CourseRepository;
 import ch.kra.gradesubmission.repository.GradeRepository;
-import ch.kra.gradesubmission.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class GradeServiceImpl implements GradeService {
 
     private final GradeRepository gradeRepository;
-    private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
+    private final StudentService studentService;
+    private final CourseService courseService;
 
     @Override
     public List<Grade> getAllGrades() {
@@ -33,10 +31,10 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade saveGrade(final Grade grade, final Long studentId, final Long courseId) {
-        Student student = studentRepository.findById(studentId).get();
+        Student student = studentService.getStudent(studentId);
         grade.setStudent(student);
 
-        Course course = courseRepository.findById(courseId).get();
+        Course course = courseService.getCourse(courseId);
         grade.setCourse(course);
 
         return gradeRepository.save(grade);
