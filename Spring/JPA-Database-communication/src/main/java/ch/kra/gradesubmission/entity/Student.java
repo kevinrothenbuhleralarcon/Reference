@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Primary;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,9 @@ public class Student {
     private LocalDate birthDate;
 
     @JsonIgnore //To avoid that this field is serialized as Json otherwise it will loop
-    @OneToMany(mappedBy = "student") //Avoid creating a join table as the relation is already defined, usually goes on the side that is not the owner of the relationship
+    @OneToMany(
+            mappedBy = "student", //Avoid creating a join table as the relation is already defined, usually goes on the side that is not the owner of the relationship
+            cascade = CascadeType.ALL //So that if we delete a student all the associate grades are also deleted
+    )
     private List<Grade> grades;
 }
