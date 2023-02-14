@@ -1,8 +1,8 @@
-package com.ltp.gradesubmission.service;
+package ch.kra.gradesubmission.service;
 
 import java.util.List;
 
-import com.ltp.gradesubmission.entity.Grade;
+import ch.kra.gradesubmission.entity.Grade;
 
 public class GradeServiceImpl implements GradeService {
     

@@ -1,6 +1,6 @@
-package com.ltp.gradesubmission.web;
+package ch.kra.gradesubmission.web;
 
-import com.ltp.gradesubmission.entity.Grade;
+import ch.kra.gradesubmission.entity.Grade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

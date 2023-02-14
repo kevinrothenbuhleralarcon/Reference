@@ -1,4 +1,4 @@
-package com.ltp.gradesubmission.entity;
+package ch.kra.gradesubmission.entity;
 
 import lombok.Getter;
 import lombok.Setter;

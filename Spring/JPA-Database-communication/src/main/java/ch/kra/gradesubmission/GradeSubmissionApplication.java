@@ -1,4 +1,4 @@
-package com.ltp.gradesubmission;
+package ch.kra.gradesubmission;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

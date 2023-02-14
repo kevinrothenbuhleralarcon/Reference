@@ -1,8 +1,8 @@
-package com.ltp.gradesubmission.service;
+package ch.kra.gradesubmission.service;
 
 import java.util.List;
 
-import com.ltp.gradesubmission.entity.Student;
+import ch.kra.gradesubmission.entity.Student;
 
 public interface StudentService {
     Student getStudent(Long id);

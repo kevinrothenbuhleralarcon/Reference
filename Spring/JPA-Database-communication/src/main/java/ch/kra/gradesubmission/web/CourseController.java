@@ -1,6 +1,6 @@
-package com.ltp.gradesubmission.web;
+package ch.kra.gradesubmission.web;
 
-import com.ltp.gradesubmission.entity.Course;
+import ch.kra.gradesubmission.entity.Course;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +22,7 @@ public class CourseController {
     public ResponseEntity<List<Course>> getCourses() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable final Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
