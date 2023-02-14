@@ -62,6 +62,7 @@ public class GradeController {
             @PathVariable final Long studentId,
             @PathVariable final Long courseId
     ) {
+        gradeService.deleteGrade(studentId, courseId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
