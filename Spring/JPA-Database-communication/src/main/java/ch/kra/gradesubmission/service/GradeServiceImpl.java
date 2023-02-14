@@ -2,9 +2,9 @@ package ch.kra.gradesubmission.service;
 
 import java.util.List;
 
-import ch.kra.gradesubmission.entity.Course;
-import ch.kra.gradesubmission.entity.Grade;
-import ch.kra.gradesubmission.entity.Student;
+import ch.kra.gradesubmission.model.Course;
+import ch.kra.gradesubmission.model.Grade;
+import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.repository.CourseRepository;
 import ch.kra.gradesubmission.repository.GradeRepository;
 import ch.kra.gradesubmission.repository.StudentRepository;

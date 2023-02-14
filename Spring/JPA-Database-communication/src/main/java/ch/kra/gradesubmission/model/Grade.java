@@ -1,4 +1,4 @@
-package ch.kra.gradesubmission.entity;
+package ch.kra.gradesubmission.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

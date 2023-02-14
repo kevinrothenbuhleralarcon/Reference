@@ -1,6 +1,6 @@
-package ch.kra.gradesubmission.web;
+package ch.kra.gradesubmission.api;
 
-import ch.kra.gradesubmission.entity.Student;
+import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

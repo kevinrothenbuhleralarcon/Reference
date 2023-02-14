@@ -1,13 +1,11 @@
-package ch.kra.gradesubmission.entity;
+package ch.kra.gradesubmission.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Primary;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

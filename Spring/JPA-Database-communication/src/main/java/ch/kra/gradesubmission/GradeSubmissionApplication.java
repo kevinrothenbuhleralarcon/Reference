@@ -1,11 +1,10 @@
 package ch.kra.gradesubmission;
 
-import ch.kra.gradesubmission.entity.Course;
-import ch.kra.gradesubmission.entity.Student;
+import ch.kra.gradesubmission.model.Course;
+import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.repository.CourseRepository;
 import ch.kra.gradesubmission.repository.StudentRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

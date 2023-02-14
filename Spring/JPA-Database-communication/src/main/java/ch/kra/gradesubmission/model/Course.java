@@ -1,7 +1,6 @@
-package ch.kra.gradesubmission.entity;
+package ch.kra.gradesubmission.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

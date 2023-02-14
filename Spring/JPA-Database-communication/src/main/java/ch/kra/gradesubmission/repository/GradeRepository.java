@@ -1,6 +1,6 @@
 package ch.kra.gradesubmission.repository;
 
-import ch.kra.gradesubmission.entity.Grade;
+import ch.kra.gradesubmission.model.Grade;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
