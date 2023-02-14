@@ -32,7 +32,10 @@ public class Course {
     private String subject;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(
+            nullable = false,
+            unique = true // Indicate that we cannot have 2 courses with the same code
+    )
     private String code;
 
     @NonNull

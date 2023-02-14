@@ -12,12 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"student_id", "course_id"}) // set that we can only have one note for the combination of student id and course id
+})
 public class Grade {
 
     @Id
