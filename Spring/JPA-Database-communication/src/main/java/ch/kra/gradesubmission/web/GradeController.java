@@ -18,17 +18,17 @@ public class GradeController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Grade>> getGrades() {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getAllGrades(), HttpStatus.OK);
     }
 
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<Grade>> getStudentGrades(@PathVariable final Long studentId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getStudentGrades(studentId), HttpStatus.OK);
     }
 
     @GetMapping("/course/{courseId}")
     public ResponseEntity<List<Grade>> getCourseGrades(@PathVariable final Long courseId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getCourseGrades(courseId), HttpStatus.OK);
     }
 
     @GetMapping("/student/{studentId}/course/{courseId}")
@@ -54,7 +54,7 @@ public class GradeController {
             @PathVariable final Long courseId,
             @RequestBody final Grade grade
     ) {
-        return new ResponseEntity<>(grade, HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.updateGrade(grade.getScore(), studentId, courseId), HttpStatus.OK);
     }
 
     @DeleteMapping("/student/{studentId}/course/{courseId}")
