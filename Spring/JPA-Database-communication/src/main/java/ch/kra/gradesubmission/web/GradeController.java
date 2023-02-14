@@ -1,16 +1,20 @@
 package ch.kra.gradesubmission.web;
 
 import ch.kra.gradesubmission.entity.Grade;
+import ch.kra.gradesubmission.service.GradeService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/grade")
 public class GradeController {
+
+    private final GradeService gradeService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Grade>> getGrades() {
@@ -32,7 +36,7 @@ public class GradeController {
             @PathVariable final Long studentId,
             @PathVariable final Long courseId
     ) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getGrade(studentId, courseId), HttpStatus.OK);
     }
 
     @PostMapping("/student/{studentId}/course/{courseId}")
@@ -41,7 +45,7 @@ public class GradeController {
             @PathVariable final Long courseId,
             @RequestBody final Grade grade
     ) {
-        return new ResponseEntity<>(grade, HttpStatus.CREATED);
+        return new ResponseEntity<>(gradeService.saveGrade(grade, studentId, courseId), HttpStatus.CREATED);
     }
 
     @PutMapping("/student/{studentId}/course/{courseId}")

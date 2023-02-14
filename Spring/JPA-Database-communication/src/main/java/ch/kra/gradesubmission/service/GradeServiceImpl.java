@@ -3,31 +3,43 @@ package ch.kra.gradesubmission.service;
 import java.util.List;
 
 import ch.kra.gradesubmission.entity.Grade;
+import ch.kra.gradesubmission.entity.Student;
+import ch.kra.gradesubmission.repository.GradeRepository;
+import ch.kra.gradesubmission.repository.StudentRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
+@Service
 public class GradeServiceImpl implements GradeService {
+
+    private final GradeRepository gradeRepository;
+    private final StudentRepository studentRepository;
     
     @Override
-    public Grade getGrade(Long studentId, Long courseId) {
+    public Grade getGrade(final Long studentId, final Long courseId) {
+        return gradeRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public Grade saveGrade(final Grade grade, final Long studentId, final Long courseId) {
+        Student student = studentRepository.findById(studentId).get();
+        grade.setStudent(student);
+        return gradeRepository.save(grade);
+    }
+
+    @Override
+    public Grade updateGrade(final String score, final Long studentId, final Long courseId) {
         return null;
     }
 
     @Override
-    public Grade saveGrade(Grade grade, Long studentId, Long courseId) {
-        return null;
-    }
-
-    @Override
-    public Grade updateGrade(String score, Long studentId, Long courseId) {
-        return null;
-    }
-
-    @Override
-    public void deleteGrade(Long studentId, Long courseId) {
+    public void deleteGrade(final Long studentId, final Long courseId) {
         
     }
 
     @Override
-    public List<Grade> getStudentGrades(Long studentId) {
+    public List<Grade> getStudentGrades(final Long studentId) {
         return null;
     }
 
