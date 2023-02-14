@@ -2,6 +2,7 @@ package ch.kra.gradesubmission.service;
 
 import java.util.List;
 
+import ch.kra.gradesubmission.exception.GradeNotFoundException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Grade;
 import ch.kra.gradesubmission.model.Student;
@@ -26,7 +27,8 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade getGrade(final Long studentId, final Long courseId) {
-        return gradeRepository.findByStudentIdAndCourseId(studentId, courseId);
+        return gradeRepository.findByStudentIdAndCourseId(studentId, courseId)
+                .orElseThrow(() -> new GradeNotFoundException(studentId, courseId));
     }
 
     @Override
@@ -42,7 +44,8 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade updateGrade(final String score, final Long studentId, final Long courseId) {
-        Grade grade = gradeRepository.findByStudentIdAndCourseId(studentId, courseId);
+        Grade grade = gradeRepository.findByStudentIdAndCourseId(studentId, courseId)
+                .orElseThrow(() -> new GradeNotFoundException(studentId, courseId));
         grade.setScore(score);
         return gradeRepository.save(grade); //If we save a grade that is already present in the database, it will update it.
     }
