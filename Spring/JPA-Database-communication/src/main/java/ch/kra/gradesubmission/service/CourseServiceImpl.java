@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class CourseServiceImpl implements CourseService {
+    private final CourseRepository courseRepository;
 
     @Override
     public List<Course> getCourses() {
         return (List<Course>) courseRepository.findAll();
     }
-    private final CourseRepository courseRepository;
 
     @Override
     public Course getCourse(final Long id) {
