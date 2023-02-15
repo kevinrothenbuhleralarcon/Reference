@@ -29,8 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Set<Course> getEnrolledCourses(Long id) {
-        Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException(id));
+        Student student = getStudent(id);
         return student.getCourses();
     }
 
