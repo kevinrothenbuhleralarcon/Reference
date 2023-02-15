@@ -3,6 +3,7 @@ package ch.kra.gradesubmission;
 import ch.kra.gradesubmission.exception.CourseNotFoundException;
 import ch.kra.gradesubmission.exception.ErrorResponse;
 import ch.kra.gradesubmission.exception.GradeNotFoundException;
+import ch.kra.gradesubmission.exception.StudentNotEnrolledException;
 import ch.kra.gradesubmission.exception.StudentNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
     // Allow to return a custom response if the ContactNotFound exception is raised
-    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class})
+    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class, StudentNotEnrolledException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex) {
         return new ResponseEntity<>(new ErrorResponse(List.of(ex.getMessage())), HttpStatus.NOT_FOUND);
     }

@@ -1,6 +1,7 @@
 package ch.kra.gradesubmission.service;
 
 import ch.kra.gradesubmission.exception.GradeNotFoundException;
+import ch.kra.gradesubmission.exception.StudentNotEnrolledException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Grade;
 import ch.kra.gradesubmission.model.Student;
@@ -32,12 +33,20 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Grade saveGrade(final Grade grade, final Long studentId, final Long courseId) {
         Student student = studentService.getStudent(studentId);
-        grade.setStudent(student);
-
         Course course = courseService.getCourse(courseId);
+
+        if (!isStudentEnrolledInCourse(student, course)) {
+            throw new StudentNotEnrolledException(studentId, courseId);
+        }
+
+        grade.setStudent(student);
         grade.setCourse(course);
 
         return gradeRepository.save(grade);
+    }
+
+    private boolean isStudentEnrolledInCourse(final Student student, final Course course) {
+        return course.getStudents().contains(student);
     }
 
     @Override

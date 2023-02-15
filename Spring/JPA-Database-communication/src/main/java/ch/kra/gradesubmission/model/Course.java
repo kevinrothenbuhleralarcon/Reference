@@ -13,9 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -52,4 +56,19 @@ public class Course {
             cascade = CascadeType.ALL //So that if we delete a student all the associate grades are also deleted
     )
     private List<Grade> grades;
+
+    @JsonIgnore //To avoid that this field is serialized as Json because it's too messy
+    @ManyToMany
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(
+                    name = "course_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<Student> students;
 }

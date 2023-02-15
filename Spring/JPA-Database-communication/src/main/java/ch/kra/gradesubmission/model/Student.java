@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -20,6 +21,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -49,4 +51,8 @@ public class Student {
             cascade = CascadeType.ALL //So that if we delete a student all the associate grades are also deleted
     )
     private List<Grade> grades;
+
+    @JsonIgnore //To avoid that this field is serialized as Json otherwise it will loop
+    @ManyToMany(mappedBy = "students") //Avoid creating a join table as the relation is already defined is course
+    private Set<Course> courses;
 }

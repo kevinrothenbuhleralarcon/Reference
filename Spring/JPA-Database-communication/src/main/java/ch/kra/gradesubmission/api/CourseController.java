@@ -1,6 +1,7 @@
 package ch.kra.gradesubmission.api;
 
 import ch.kra.gradesubmission.model.Course;
+import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.service.CourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,12 +10,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -43,5 +46,15 @@ public class CourseController {
     public ResponseEntity<HttpStatus> deleteCourse(@PathVariable final Long id) {
         courseService.deleteCourse(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{courseId}/student/{studentId}")
+    public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
+        return new ResponseEntity<>(courseService.addStudentToCourse(studentId, courseId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/students")
+    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long id) {
+        return new ResponseEntity<>(courseService.getEnrolledStudents(id), HttpStatus.OK);
     }
 }

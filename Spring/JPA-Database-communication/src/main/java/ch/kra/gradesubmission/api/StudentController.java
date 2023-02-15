@@ -1,5 +1,6 @@
 package ch.kra.gradesubmission.api;
 
+import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.service.StudentService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -26,6 +28,11 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable final Long id) {
         return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/courses")
+    public ResponseEntity<Set<Course>> getEnrolledCourses(@PathVariable final Long id) {
+        return new ResponseEntity<>(studentService.getEnrolledCourses(id), HttpStatus.OK);
     }
 
     @PostMapping
