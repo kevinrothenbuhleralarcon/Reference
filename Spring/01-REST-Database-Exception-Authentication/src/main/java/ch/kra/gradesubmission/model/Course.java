@@ -61,14 +61,8 @@ public class Course {
     @ManyToMany
     @JoinTable(
             name = "course_student",
-            joinColumns = @JoinColumn(
-                    name = "course_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "student_id",
-                    referencedColumnName = "id"
-            )
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
     )
     private Set<Student> students; // A Set of student to enforce that we cannot add the same student to the same course
 }
