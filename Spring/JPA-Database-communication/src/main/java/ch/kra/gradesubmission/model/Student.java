@@ -54,5 +54,5 @@ public class Student {
 
     @JsonIgnore //To avoid that this field is serialized as Json otherwise it will loop
     @ManyToMany(mappedBy = "students") //Avoid creating a join table as the relation is already defined is course
-    private Set<Course> courses;
+    private Set<Course> courses; // A Set of course to enforce that we cannot add the same student to the same course
 }

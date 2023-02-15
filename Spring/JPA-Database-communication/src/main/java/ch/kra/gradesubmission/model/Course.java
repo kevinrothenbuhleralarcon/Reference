@@ -70,5 +70,5 @@ public class Course {
                     referencedColumnName = "id"
             )
     )
-    private Set<Student> students;
+    private Set<Student> students; // A Set of student to enforce that we cannot add the same student to the same course
 }
