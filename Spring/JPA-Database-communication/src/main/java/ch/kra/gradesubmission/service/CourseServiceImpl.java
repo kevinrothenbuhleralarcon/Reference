@@ -6,6 +6,7 @@ import ch.kra.gradesubmission.exception.CourseNotFoundException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.repository.CourseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -31,6 +32,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourse(final Long id) {
-        courseRepository.deleteById(id);
+        try {
+            courseRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // Not needed just to test what happens if we catch a runtimeException, in this case we need to rethrow it if we want to handle it in the Exception Handler
+            System.out.println("Test try-catch: " + e.getMessage());
+            throw e;
+        }
     }
 }

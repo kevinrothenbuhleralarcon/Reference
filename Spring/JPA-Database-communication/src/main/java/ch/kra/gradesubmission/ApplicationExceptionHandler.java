@@ -5,6 +5,7 @@ import ch.kra.gradesubmission.exception.ErrorResponse;
 import ch.kra.gradesubmission.exception.GradeNotFoundException;
 import ch.kra.gradesubmission.exception.StudentNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,12 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<Object> handleDataAccessException(EmptyResultDataAccessException ex) {
+        return new ResponseEntity<>(new ErrorResponse(List.of("Cannot delete non-existing resource")), HttpStatus.NOT_FOUND);
+    }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        return new ResponseEntity<>(new ErrorResponse(List.of("Data Integrity Violation: we cannot process your request")), HttpStatus.BAD_REQUEST);
     }
 
     // Allow to return a custom response if the RequestBody is not valid
