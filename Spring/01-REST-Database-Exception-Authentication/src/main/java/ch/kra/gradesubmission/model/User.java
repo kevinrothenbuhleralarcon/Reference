@@ -1,5 +1,7 @@
 package ch.kra.gradesubmission.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -31,6 +33,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // So that the password is written when received but not sent when sending the user
     @NotBlank(message = "password cannot be blank")
     @NonNull
     @Column(nullable = false)

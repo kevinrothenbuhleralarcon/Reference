@@ -4,13 +4,14 @@ import ch.kra.gradesubmission.exception.EntityNotFoundException;
 import ch.kra.gradesubmission.model.User;
 import ch.kra.gradesubmission.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class UserServiceImpl implements UserService{
-
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User getUser(Long id) {
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 }
