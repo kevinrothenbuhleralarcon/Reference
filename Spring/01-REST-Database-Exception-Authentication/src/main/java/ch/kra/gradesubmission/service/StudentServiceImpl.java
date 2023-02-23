@@ -1,6 +1,6 @@
 package ch.kra.gradesubmission.service;
 
-import ch.kra.gradesubmission.exception.StudentNotFoundException;
+import ch.kra.gradesubmission.exception.EntityNotFoundException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.repository.StudentRepository;
@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(final Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException(id));
+                .orElseThrow(() -> new EntityNotFoundException(id, Student.class));
     }
 
     @Override

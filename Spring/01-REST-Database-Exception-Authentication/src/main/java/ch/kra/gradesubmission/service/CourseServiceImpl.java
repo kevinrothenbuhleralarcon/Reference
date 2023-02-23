@@ -3,7 +3,7 @@ package ch.kra.gradesubmission.service;
 import java.util.List;
 import java.util.Set;
 
-import ch.kra.gradesubmission.exception.CourseNotFoundException;
+import ch.kra.gradesubmission.exception.EntityNotFoundException;
 import ch.kra.gradesubmission.model.Course;
 import ch.kra.gradesubmission.model.Student;
 import ch.kra.gradesubmission.repository.CourseRepository;
@@ -25,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getCourse(final Long id) {
         return courseRepository.findById(id)
-                .orElseThrow(() -> new CourseNotFoundException(id));
+                .orElseThrow(() -> new EntityNotFoundException(id, Course.class));
     }
 
     @Override
