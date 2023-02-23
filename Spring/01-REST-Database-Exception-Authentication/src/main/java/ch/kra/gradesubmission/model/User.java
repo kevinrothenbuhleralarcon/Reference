@@ -24,6 +24,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "users")
 public class User {
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // So that the password is written when received but not sent when sending the user
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

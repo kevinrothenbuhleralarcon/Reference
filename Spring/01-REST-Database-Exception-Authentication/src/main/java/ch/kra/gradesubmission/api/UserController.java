@@ -16,7 +16,6 @@ import javax.validation.Valid;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
@@ -26,8 +25,13 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
-    @PostMapping("/register")
+    @PostMapping(Routes.REGISTER)
     public ResponseEntity<User> createUser(@Valid @RequestBody final User user) {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping(Routes.LOGIN)
+    public ResponseEntity<HttpStatus> login(@Valid @RequestBody final User user) {
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
