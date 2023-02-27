@@ -1,7 +1,6 @@
 package ch.kra.gradesubmission.security.filter;
 
 import ch.kra.gradesubmission.exception.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
