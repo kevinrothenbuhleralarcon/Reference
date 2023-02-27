@@ -15,7 +15,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
         } catch (IOException e) {
             throw new RuntimeException();
         }
