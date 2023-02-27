@@ -27,8 +27,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        System.out.println("JWT validity: " + jwtConfiguration.getValidityDuration());
-        System.out.println("JWT Secret " + jwtConfiguration.getSecret());
         final AuthenticationFilter authenticationFilter = new AuthenticationFilter((CustomAuthenticationManager) authenticationManager, jwtConfiguration);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
         http

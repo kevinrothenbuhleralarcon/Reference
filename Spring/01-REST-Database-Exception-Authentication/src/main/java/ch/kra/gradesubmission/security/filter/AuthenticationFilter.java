@@ -43,12 +43,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(authResult.getName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + jwtConfiguration.getValidityDuration()))
                 .sign(Algorithm.HMAC512(jwtConfiguration.getSecret()));
-        System.out.println(token);
-        System.out.println("Wooohoo, authentication worked");
+        response.setHeader("Authorization", "Bearer " + token);
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        System.out.println("Failed to authenticate");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write(failed.getMessage());
+        response.getWriter().flush();
     }
 }
