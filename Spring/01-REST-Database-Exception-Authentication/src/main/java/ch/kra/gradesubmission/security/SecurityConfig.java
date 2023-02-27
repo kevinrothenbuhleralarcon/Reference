@@ -4,6 +4,7 @@ package ch.kra.gradesubmission.security;
 import ch.kra.gradesubmission.api.Routes;
 import ch.kra.gradesubmission.security.filter.AuthenticationFilter;
 import ch.kra.gradesubmission.security.filter.ExceptionHandlerFilter;
+import ch.kra.gradesubmission.security.jwt.JWTConfiguration;
 import ch.kra.gradesubmission.security.manager.CustomAuthenticationManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +23,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfig {
 
     private final AuthenticationManager authenticationManager;
+    private final JWTConfiguration jwtConfiguration;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        final AuthenticationFilter authenticationFilter = new AuthenticationFilter((CustomAuthenticationManager) authenticationManager);
+        System.out.println("JWT validity: " + jwtConfiguration.getValidityDuration());
+        System.out.println("JWT Secret " + jwtConfiguration.getSecret());
+        final AuthenticationFilter authenticationFilter = new AuthenticationFilter((CustomAuthenticationManager) authenticationManager, jwtConfiguration);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
         http
                 .headers().frameOptions().disable() // New Line: the h2 console runs on a "frame". By default, Spring Security prevents rendering within an iframe. This line disables its prevention.

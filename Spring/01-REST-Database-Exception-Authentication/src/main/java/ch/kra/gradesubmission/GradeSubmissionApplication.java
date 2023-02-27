@@ -8,15 +8,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 @SpringBootApplication
+@PropertySource("classpath:jwt.properties") // Defines that we have another property file
 public class GradeSubmissionApplication implements CommandLineRunner {
-
-
     private final StudentRepository studentRepository;
 
     private final CourseRepository courseRepository;
