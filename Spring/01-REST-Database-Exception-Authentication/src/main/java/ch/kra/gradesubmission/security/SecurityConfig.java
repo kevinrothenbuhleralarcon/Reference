@@ -1,7 +1,6 @@
 package ch.kra.gradesubmission.security;
 
 
-import ch.kra.gradesubmission.api.Routes;
 import ch.kra.gradesubmission.security.filter.AuthenticationFilter;
 import ch.kra.gradesubmission.security.filter.ExceptionHandlerFilter;
 import ch.kra.gradesubmission.security.filter.JWTAuthorizationFilter;
@@ -22,6 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
+    public static final String REGISTER = "/register";
 
     private final AuthenticationManager authenticationManager;
     private final JWTConfiguration jwtConfiguration;
@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/h2/**").permitAll() // New Line: allows us to access the h2 console without the need to authenticate. ' ** '  instead of ' * ' because multiple path levels will follow /h2.
-                .antMatchers(HttpMethod.POST, Routes.REGISTER).permitAll()
+                .antMatchers(HttpMethod.POST, REGISTER).permitAll()
                 .anyRequest().authenticated()  // So that all routes needs a credential
                 .and()
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class) // Set a filter before the authentication filter to handle the exception and return a 400 error
