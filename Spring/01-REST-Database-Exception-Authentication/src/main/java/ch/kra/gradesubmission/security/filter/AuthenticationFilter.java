@@ -1,6 +1,7 @@
 package ch.kra.gradesubmission.security.filter;
 
 import ch.kra.gradesubmission.model.User;
+import ch.kra.gradesubmission.security.SecurityConfig;
 import ch.kra.gradesubmission.security.jwt.JWTConfiguration;
 import ch.kra.gradesubmission.security.manager.CustomAuthenticationManager;
 import com.auth0.jwt.JWT;
@@ -43,7 +44,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(authResult.getName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + jwtConfiguration.getValidityDuration()))
                 .sign(Algorithm.HMAC512(jwtConfiguration.getSecret()));
-        response.setHeader("Authorization", "Bearer " + token);
+        response.setHeader(SecurityConfig.AUTHORIZATION, SecurityConfig.BEARER + token);
     }
 
     @Override

@@ -28,9 +28,4 @@ public class UserController {
     public ResponseEntity<User> createUser(@Valid @RequestBody final User user) {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
-
-    @PostMapping(Routes.LOGIN)
-    public ResponseEntity<HttpStatus> login(@Valid @RequestBody final User user) {
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
 }

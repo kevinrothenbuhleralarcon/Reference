@@ -4,23 +4,24 @@ package ch.kra.gradesubmission.security;
 import ch.kra.gradesubmission.api.Routes;
 import ch.kra.gradesubmission.security.filter.AuthenticationFilter;
 import ch.kra.gradesubmission.security.filter.ExceptionHandlerFilter;
+import ch.kra.gradesubmission.security.filter.JWTAuthorizationFilter;
 import ch.kra.gradesubmission.security.jwt.JWTConfiguration;
 import ch.kra.gradesubmission.security.manager.CustomAuthenticationManager;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import lombok.AllArgsConstructor;
-
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String BEARER = "Bearer ";
 
     private final AuthenticationManager authenticationManager;
     private final JWTConfiguration jwtConfiguration;
@@ -40,6 +41,7 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class) // Set a filter before the authentication filter to handle the exception and return a 400 error
                 .addFilter(authenticationFilter)
+                .addFilterAfter(new JWTAuthorizationFilter(jwtConfiguration), AuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // So a session token is not created after a login and all requests need a credential
         return http.build();
     }
