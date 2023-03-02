@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Credentials} from "./Credentials";
+import {Credentials} from "./model/Credentials";
 import {delay, Observable, of} from "rxjs";
-import {FieldError} from "./FieldError";
+import {FieldError} from "./model/FieldError";
 
 @Injectable({
   providedIn: 'root'

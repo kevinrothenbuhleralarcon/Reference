@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
 import {FakeLoginService} from "./fake-login.service";
-import {Credentials} from "./Credentials";
+import {Credentials} from "./model/Credentials";
 import {filter, first} from "rxjs";
-import {FieldError} from "./FieldError";
+import {FieldError} from "./model/FieldError";
 
 @Component({
   selector: 'app-root',
