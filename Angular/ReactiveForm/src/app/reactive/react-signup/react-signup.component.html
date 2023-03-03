@@ -1,0 +1,46 @@
+<div class="row justify-content-center align-items-center m-5">
+  <div class="col-6">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          formControlName="username"
+          type="text"
+          name="username"
+          id="username"
+          class="form-control">
+        <div
+          class="alert alert-danger"
+          *ngIf="username?.touched && username?.invalid"
+        >
+          <div
+            *ngFor="let error of username?.errors! | keyvalue"
+          >
+            {{error.value}}
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          name="password"
+          id="password">
+        <div
+          class="alert alert-danger"
+          *ngIf="password?.touched && password?.invalid">
+          <div
+            *ngFor="let error of password?.errors! | keyvalue"
+          >
+            {{error.value}}
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
+import {ReactSignupComponent} from "./react-signup/react-signup.component";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: 'react', component: ReactSignupComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class ReactiveRoutingModule { }

@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import {Credentials} from "../../model/Credentials";
+import {first} from "rxjs";
+import {FakeLoginService} from "../../fake-login.service";
+import {NgForm} from "@angular/forms";
+
+@Component({
+  selector: 'app-template-signup',
+  templateUrl: './template-signup.component.html',
+  styleUrls: ['./template-signup.component.scss']
+})
+export class TemplateSignupComponent implements OnInit {
+
+  credentials = new Credentials()
+
+  constructor(private fakeLoginService: FakeLoginService) { }
+
+  ngOnInit(): void {
+  }
+
+  login(form: NgForm): void {
+    this.fakeLoginService.login(this.credentials).pipe(first())
+      .subscribe(errors => {
+        errors.forEach(err => {
+          const control = form.controls[err.name];
+          if (control !== null) {
+            const controlErrors = control.errors;
+            control.setErrors({...controlErrors, [err.errorType]: err.errorMessage});
+          }
+        })
+      });
+  }
+
+}
