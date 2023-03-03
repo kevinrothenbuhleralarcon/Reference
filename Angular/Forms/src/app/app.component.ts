@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {FakeLoginService} from "./fake-login.service";
-import {Credentials} from "./model/Credentials";
+import {FakeLoginService} from "./reactive/fake-login.service";
+import {Credentials} from "./reactive/model/Credentials";
 import {first, Subscription} from "rxjs";
 
 @Component({

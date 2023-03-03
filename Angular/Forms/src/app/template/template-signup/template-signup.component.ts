@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Credentials} from "../../model/Credentials";
+import {Component, OnInit} from '@angular/core';
 import {first} from "rxjs";
-import {FakeLoginService} from "../../fake-login.service";
 import {NgForm} from "@angular/forms";
+import {Credentials} from "../model/Credentials";
+import {FakeLoginService} from "../fake-login.service";
 
 @Component({
   selector: 'app-template-signup',

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
-import {Credentials} from "../../model/Credentials";
+import {Credentials} from "../model/Credentials";
 import {first, Subscription} from "rxjs";
-import {FakeLoginService} from "../../fake-login.service";
+import {FakeLoginService} from "../fake-login.service";
 
 @Component({
   selector: 'app-react-signup',
