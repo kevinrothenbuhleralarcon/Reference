@@ -2,17 +2,20 @@
 
   <label [for]="name" class="form-label">{{ label }}</label>
   <input
-    formControlName="control"
+    ngModel
+    [value]="model"
+    (ngModelChange)="modelChange.emit($event)"
     [type]="type"
     [name]="name"
     [id]="name"
+    #input="ngModel"
     class="form-control">
 
   <div
     class="alert alert-danger"
-    *ngIf="control?.touched && control?.invalid"
+    *ngIf="input.touched && input.invalid"
   >
-    <div *ngFor="let error of control?.errors | keyvalue">
+    <div *ngFor="let error of input.errors | keyvalue">
       {{error.value}}
     </div>
   </div>

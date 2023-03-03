@@ -11,6 +11,9 @@ import { InputWithErrorsComponent } from './input-with-errors/input-with-errors.
     ReactSignupComponent,
     InputWithErrorsComponent
   ],
+  exports: [
+    InputWithErrorsComponent
+  ],
   imports: [
     CommonModule,
     ReactiveRoutingModule,

@@ -2,25 +2,13 @@
   <div class="col-6">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input
-          formControlName="username"
-          type="text"
-          name="username"
-          id="username"
-          class="form-control">
-        <div
-          class="alert alert-danger"
-          *ngIf="username?.touched && username?.invalid"
-        >
-          <div
-            *ngFor="let error of username?.errors! | keyvalue"
-          >
-            {{error.value}}
-          </div>
-        </div>
-      </div>
+      <app-input-with-errors
+        name="username"
+        type="text"
+        label="Username"
+        [control]="username"
+      ></app-input-with-errors>
+
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input
