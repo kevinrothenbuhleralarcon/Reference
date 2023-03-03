@@ -6,7 +6,6 @@
         name="username"
         type="text"
         label="Username"
-        [control]="username"
       ></app-input-with-errors>
 
       <div class="mb-3">
@@ -31,4 +30,8 @@
       <button class="btn btn-primary" type="submit">Login</button>
     </form>
   </div>
+</div>
+<div>
+  <div>{{ loginForm.value | json }}</div>
+  <div>{{ credentials | json }}</div>
 </div>

@@ -1,8 +1,8 @@
-<div class="mb-3">
+<div class="mb-3" [formGroup]="control">
 
   <label [for]="name" class="form-label">{{ label }}</label>
   <input
-    formControlName="control"
+    formControlName="input"
     [type]="type"
     [name]="name"
     [id]="name"

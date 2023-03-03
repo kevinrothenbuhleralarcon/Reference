@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormControl} from "@angular/forms";
+import {AbstractControl, ControlContainer, FormControl, FormGroup, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-input-with-errors',
@@ -16,8 +16,9 @@ export class InputWithErrorsComponent implements OnInit {
   @Input()
   type: string = '';
 
-  @Input()
-  control!: AbstractControl<any, any> | null;
+  control = new FormGroup({
+    input: new FormControl()
+  });
 
   constructor() { }
 

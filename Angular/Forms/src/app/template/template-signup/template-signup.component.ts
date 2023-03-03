@@ -7,7 +7,6 @@ import {FakeLoginService} from "../fake-login.service";
 @Component({
   selector: 'app-template-signup',
   templateUrl: './template-signup.component.html',
-  styleUrls: ['./template-signup.component.scss']
 })
 export class TemplateSignupComponent implements OnInit {
 

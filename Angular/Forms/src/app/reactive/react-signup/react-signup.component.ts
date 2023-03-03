@@ -6,13 +6,12 @@ import {FakeLoginService} from "../fake-login.service";
 
 @Component({
   selector: 'app-react-signup',
-  templateUrl: './react-signup.component.html',
-  styleUrls: ['./react-signup.component.scss']
+  templateUrl: './react-signup.component.html'
 })
 export class ReactSignupComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
-  private credentials = new Credentials();
+  credentials = new Credentials();
   private formSubscription!: Subscription;
 
 
