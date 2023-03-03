@@ -11,6 +11,7 @@ export class FakeLoginService {
   constructor() { }
 
   login(credentials: Credentials): Observable<FieldError[]> {
+    console.log(credentials);
     let errors = [];
     if (credentials.username !== 'kevin') {
       errors.push(new FieldError('username', 'notValid', 'Username is not correct'));

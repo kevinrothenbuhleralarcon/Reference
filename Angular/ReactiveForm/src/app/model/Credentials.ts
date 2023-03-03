@@ -1,8 +1,8 @@
 export class Credentials {
-  username!: string;
-  password!: string;
+  username: string = '';
+  password: string = '';
 
-  public constructor(init?: Partial<Credentials>) {
+  setCredentials(init?: Credentials) {
     Object.assign(this, init);
   }
 }
