@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ControlContainer, NgForm} from "@angular/forms";
 
 @Component({
@@ -16,12 +16,6 @@ export class InputWithErrorsComponent implements OnInit {
 
   @Input()
   type: string = 'text';
-
-  @Input()
-  model: string = '';
-
-  @Output()
-  modelChange = new EventEmitter<string>();
 
   constructor() { }
 

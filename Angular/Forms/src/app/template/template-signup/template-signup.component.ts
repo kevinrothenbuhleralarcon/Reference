@@ -8,17 +8,13 @@ import {FakeLoginService} from "../fake-login.service";
   selector: 'app-template-signup',
   templateUrl: './template-signup.component.html',
 })
-export class TemplateSignupComponent implements OnInit {
-
-  credentials = new Credentials()
-
+export class TemplateSignupComponent {
   constructor(private fakeLoginService: FakeLoginService) { }
 
-  ngOnInit(): void {
-  }
-
   login(form: NgForm): void {
-    this.fakeLoginService.login(this.credentials).pipe(first())
+    const credentials = (form.value as Credentials);
+
+    this.fakeLoginService.login(credentials).pipe(first())
       .subscribe(errors => {
         errors.forEach(err => {
           const control = form.controls[err.name];

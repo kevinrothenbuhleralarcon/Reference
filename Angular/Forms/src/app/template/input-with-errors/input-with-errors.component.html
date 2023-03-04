@@ -3,8 +3,6 @@
   <label [for]="name" class="form-label">{{ label }}</label>
   <input
     ngModel
-    [value]="model"
-    (ngModelChange)="modelChange.emit($event)"
     [type]="type"
     [name]="name"
     [id]="name"

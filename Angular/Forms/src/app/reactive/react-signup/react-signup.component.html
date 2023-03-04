@@ -3,29 +3,18 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()">
 
       <app-input-with-errors
+        formControlName="username"
         name="username"
         type="text"
         label="Username"
       ></app-input-with-errors>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          formControlName="password"
-          type="password"
-          class="form-control"
-          name="password"
-          id="password">
-        <div
-          class="alert alert-danger"
-          *ngIf="password?.touched && password?.invalid">
-          <div
-            *ngFor="let error of password?.errors! | keyvalue"
-          >
-            {{error.value}}
-          </div>
-        </div>
-      </div>
+      <app-input-with-errors
+        formControlName="password"
+        name="password"
+        type="password"
+        label="Password"
+      ></app-input-with-errors>
 
       <button class="btn btn-primary" type="submit">Login</button>
     </form>
@@ -33,5 +22,4 @@
 </div>
 <div>
   <div>{{ loginForm.value | json }}</div>
-  <div>{{ credentials | json }}</div>
 </div>

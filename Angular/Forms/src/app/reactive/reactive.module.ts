@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReactSignupComponent} from './react-signup/react-signup.component';
 import {ReactiveRoutingModule} from "./reactive-routing.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { InputWithErrorsComponent } from './input-with-errors/input-with-errors.component';
 
 
@@ -14,10 +14,11 @@ import { InputWithErrorsComponent } from './input-with-errors/input-with-errors.
   exports: [
     InputWithErrorsComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
+    ]
 })
 export class ReactiveModule { }

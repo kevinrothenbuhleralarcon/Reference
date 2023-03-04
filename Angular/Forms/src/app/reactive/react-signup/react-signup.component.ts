@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
 import {Credentials} from "../model/Credentials";
 import {first, Subscription} from "rxjs";
 import {FakeLoginService} from "../fake-login.service";
@@ -8,27 +8,13 @@ import {FakeLoginService} from "../fake-login.service";
   selector: 'app-react-signup',
   templateUrl: './react-signup.component.html'
 })
-export class ReactSignupComponent implements OnInit, OnDestroy {
-
+export class ReactSignupComponent {
   loginForm: FormGroup;
-  credentials = new Credentials();
-  private formSubscription!: Subscription;
-
 
   constructor(private fakeLoginService: FakeLoginService, private fb: FormBuilder) {
-    this.loginForm = fb.group(this.credentials);
+    this.loginForm = fb.group(new Credentials());
+    this.username?.setValidators(Validators.required);
   }
-
-  ngOnInit(): void {
-    this.formSubscription = this.loginForm.valueChanges.subscribe(() => {
-      this.credentials.setCredentials(this.loginForm.value);
-    })
-  }
-
-  ngOnDestroy(): void {
-    this.formSubscription.unsubscribe();
-  }
-
 
   get username(): AbstractControl<any, any> | null {
     return this.loginForm.get('username');
@@ -39,7 +25,8 @@ export class ReactSignupComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
-    this.fakeLoginService.login(this.credentials).pipe(first())
+    const credentials = (this.loginForm.value as Credentials);
+    this.fakeLoginService.login(credentials).pipe(first())
       .subscribe(errors => {
         errors.forEach(err => {
           const controlErrors = this.loginForm.get(err.name)?.errors;
