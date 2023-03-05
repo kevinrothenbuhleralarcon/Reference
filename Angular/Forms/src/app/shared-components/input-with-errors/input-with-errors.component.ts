@@ -32,7 +32,7 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
     onTouched = () => {
     };
 
-    constructor(@Optional() @Self() public ngControl: NgControl) {
+    constructor(@Self() public ngControl: NgControl) {
         ngControl.valueAccessor = this;
     }
 

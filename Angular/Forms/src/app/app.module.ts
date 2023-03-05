@@ -10,12 +10,13 @@ import {NavComponent} from './nav/nav.component';
 import {TemplateModule} from "./template/template.module";
 import {ReactiveModule} from "./reactive/reactive.module";
 import {SharedModule} from "./shared-components/shared.module.";
+import { AddressComponent } from './shared-components/address/address.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        NavComponent
+        NavComponent,
     ],
     imports: [
         BrowserModule,
@@ -28,6 +29,9 @@ import {SharedModule} from "./shared-components/shared.module.";
         FormsModule
     ],
     providers: [],
+    exports: [
+        AddressComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Credentials} from "../../model/Credentials";
 import {first} from "rxjs";
 import {FakeLoginService} from "../../shared-components/fake-login.service";
@@ -12,8 +12,11 @@ export class ReactSignupComponent {
     loginForm: FormGroup;
 
     constructor(private fakeLoginService: FakeLoginService, private fb: FormBuilder) {
-        this.loginForm = fb.group(new Credentials());
-        this.username?.setValidators(Validators.required);
+        this.loginForm = fb.group({
+            username: ['', Validators.required],
+            password: [''],
+            address:[]
+        });
     }
 
     get username(): AbstractControl<any, any> | null {

@@ -22,6 +22,10 @@ export class FakeLoginService {
       errors.push(new FieldError('password', 'notValid', 'Password is not correct'));
     }
 
+    errors.push(new FieldError('address.street', 'notValid', 'Street is not correct'));
+    errors.push(new FieldError('address.city', 'notValid', 'City is not correct'));
+    errors.push(new FieldError('address.zip', 'notValid', 'Zip is not correct'));
+
     return of(errors).pipe(delay(1000));
   }
 }

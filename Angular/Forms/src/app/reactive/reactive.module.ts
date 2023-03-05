@@ -15,7 +15,7 @@ import {SharedModule} from "../shared-components/shared.module.";
         ReactiveRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        SharedModule
+        SharedModule,
     ]
 })
 export class ReactiveModule {
