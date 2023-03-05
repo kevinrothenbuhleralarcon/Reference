@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {first} from "rxjs";
 import {NgForm} from "@angular/forms";
-import {Credentials} from "../model/Credentials";
-import {FakeLoginService} from "../fake-login.service";
+import {FakeLoginService} from "../../shared-components/fake-login.service";
+import {Credentials} from "../../model/Credentials";
 
 @Component({
   selector: 'app-template-signup',
@@ -12,7 +12,7 @@ export class TemplateSignupComponent {
   constructor(private fakeLoginService: FakeLoginService) { }
 
   login(form: NgForm): void {
-    const credentials = (form.value as Credentials);
+    const credentials = Credentials.fromForm(form.form);
 
     this.fakeLoginService.login(credentials).pipe(first())
       .subscribe(errors => {

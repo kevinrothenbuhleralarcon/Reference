@@ -1,25 +1,22 @@
 <div class="row justify-content-center align-items-center m-5">
-  <div class="col-6">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="col-6">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <app-input-with-errors
-        formControlName="username"
-        name="username"
-        type="text"
-        label="Username"
-      ></app-input-with-errors>
+            <app-input-with-errors
+                    formControlName="username"
+                    name="username"
+                    type="text"
+                    label="Username"
+            ></app-input-with-errors>
 
-      <app-input-with-errors
-        formControlName="password"
-        name="password"
-        type="password"
-        label="Password"
-      ></app-input-with-errors>
+            <app-input-with-errors
+                    formControlName="password"
+                    name="password"
+                    type="password"
+                    label="Password"
+            ></app-input-with-errors>
 
-      <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-  </div>
-</div>
-<div>
-  <div>{{ loginForm.value | json }}</div>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
 </div>

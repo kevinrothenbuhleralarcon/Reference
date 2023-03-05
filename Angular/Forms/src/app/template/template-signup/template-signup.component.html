@@ -1,20 +1,23 @@
 <div class="row justify-content-center align-items-center m-5">
-  <div class="col-6">
-    <form #form="ngForm" (ngSubmit)="login(form)">
+    <div class="col-6">
+        <form #form="ngForm" (ngSubmit)="login(form)">
 
-      <app-input-with-errors
-        label="Username"
-        name="username"
-        type="text"
-      ></app-input-with-errors>
+            <app-input-with-errors
+                    label="Username"
+                    name="username"
+                    type="text"
+                    ngModel
+                    required
+            ></app-input-with-errors>
 
-      <app-input-with-errors
-        label="Password"
-        name="password"
-        type="password"
-      ></app-input-with-errors>
+            <app-input-with-errors
+                    label="Password"
+                    name="password"
+                    type="password"
+                    ngModel
+            ></app-input-with-errors>
 
-      <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-  </div>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
 </div>

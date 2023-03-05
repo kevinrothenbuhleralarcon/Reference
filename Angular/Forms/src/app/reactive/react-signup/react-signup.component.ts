@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Credentials} from "../../model/Credentials";
 import {first} from "rxjs";
-import {FakeLoginService} from "../fake-login.service";
+import {FakeLoginService} from "../../shared-components/fake-login.service";
 
 @Component({
     selector: 'app-react-signup',
@@ -25,8 +25,8 @@ export class ReactSignupComponent {
     }
 
     login(): void {
-        const credentials = (this.loginForm.value as Credentials);
-        this.fakeLoginService.login(credentials).pipe(first())
+        const credential = Credentials.fromForm(this.loginForm);
+        this.fakeLoginService.login(credential).pipe(first())
                 .subscribe(errors => {
                     errors.forEach(err => {
                         const controlErrors = this.loginForm.get(err.name)?.errors;

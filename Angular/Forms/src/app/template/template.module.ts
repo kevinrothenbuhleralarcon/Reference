@@ -3,18 +3,18 @@ import {CommonModule} from '@angular/common';
 import {TemplateSignupComponent} from './template-signup/template-signup.component';
 import {TemplateRoutingModule} from "./template-routing.module";
 import {FormsModule} from "@angular/forms";
-import { InputWithErrorsComponent } from './input-with-errors/input-with-errors.component';
+import {SharedModule} from "../shared-components/shared.module.";
 
 
 @NgModule({
   declarations: [
-    TemplateSignupComponent,
-    InputWithErrorsComponent
+    TemplateSignupComponent
   ],
   imports: [
     CommonModule,
     TemplateRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ]
 })
 export class TemplateModule { }

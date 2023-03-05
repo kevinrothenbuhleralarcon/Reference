@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {delay, Observable, of} from "rxjs";
-import {FieldError} from "./model/FieldError";
-import {Credentials} from "./model/Credentials";
+import {FieldError} from "../model/FieldError";
+import {Credentials} from "../model/Credentials";
 
 
 @Injectable({

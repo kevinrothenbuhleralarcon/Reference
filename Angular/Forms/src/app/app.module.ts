@@ -9,23 +9,24 @@ import {HomeComponent} from './home/home.component';
 import {NavComponent} from './nav/nav.component';
 import {TemplateModule} from "./template/template.module";
 import {ReactiveModule} from "./reactive/reactive.module";
+import {InputWithErrorsComponent} from "./shared-components/input-with-errors/input-with-errors.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    ReactiveFormsModule,
-    TemplateModule,
-    ReactiveModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        NavComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        ReactiveFormsModule,
+        TemplateModule,
+        ReactiveModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
