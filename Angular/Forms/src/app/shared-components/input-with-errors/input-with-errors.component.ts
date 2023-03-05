@@ -1,4 +1,4 @@
-import {Component, ElementRef, Injector, Input, OnInit, Self, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, Input, OnInit, Optional, Self, ViewChild} from '@angular/core';
 import {
     ControlValueAccessor,
     FormControl, FormControlDirective,
@@ -32,12 +32,14 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
     onTouched = () => {
     };
 
-    constructor(@Self() public ngControl: NgControl) {
-        ngControl.valueAccessor = this;
+    constructor(@Optional() @Self() public ngControl: NgControl) {
+        // So if we use the component without a ngModel it does not trigger an error
+        if (ngControl !== null) {
+            ngControl.valueAccessor = this;
+        }
     }
 
     writeValue(value: string): void {
-        // this.formControl.setValue(value);
         this.input.nativeElement.value = value;
     }
 

@@ -12,9 +12,9 @@
 
     <div
             class="alert alert-danger"
-            *ngIf="ngControl.touched && ngControl.invalid"
+            *ngIf="ngControl?.touched && ngControl?.invalid"
     >
-        <div *ngFor="let error of ngControl.errors | keyvalue">
+        <div *ngFor="let error of ngControl?.errors! | keyvalue">
             <div [ngSwitch]="error.key">
                 <div *ngSwitchCase="'required'">{{ name | titlecase }} is required</div>
                 <div *ngSwitchDefault>{{ error.value }}</div>

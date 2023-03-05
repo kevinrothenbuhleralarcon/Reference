@@ -4,12 +4,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './home/home.component';
 import {NavComponent} from './nav/nav.component';
 import {TemplateModule} from "./template/template.module";
 import {ReactiveModule} from "./reactive/reactive.module";
-import {InputWithErrorsComponent} from "./shared-components/input-with-errors/input-with-errors.component";
+import {SharedModule} from "./shared-components/shared.module.";
 
 @NgModule({
     declarations: [
@@ -23,7 +23,9 @@ import {InputWithErrorsComponent} from "./shared-components/input-with-errors/in
         NgbModule,
         ReactiveFormsModule,
         TemplateModule,
-        ReactiveModule
+        ReactiveModule,
+        SharedModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
