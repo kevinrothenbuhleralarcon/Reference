@@ -33,10 +33,7 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
     };
 
     constructor(@Optional() @Self() public ngControl: NgControl) {
-        // So if we use the component without a ngModel it does not trigger an error
-        if (ngControl !== null) {
-            ngControl.valueAccessor = this;
-        }
+        ngControl.valueAccessor = this;
     }
 
     writeValue(value: string): void {
