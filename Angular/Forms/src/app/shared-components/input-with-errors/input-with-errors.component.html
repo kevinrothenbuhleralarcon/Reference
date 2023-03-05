@@ -2,18 +2,19 @@
 
     <label [for]="name" class="form-label">{{ label }}</label>
     <input
-            [formControl]="formControl"
             [type]="type"
             [name]="name"
             [id]="name"
-            (ngModelChange)="handleChange()"
-            class="form-control">
+            class="form-control"
+            #input
+            (input)="onChange(input.value)"
+            (blur)="onTouched()">
 
     <div
             class="alert alert-danger"
-            *ngIf="formControl.touched && formControl?.invalid"
+            *ngIf="ngControl.touched && ngControl.invalid"
     >
-        <div *ngFor="let error of formControl.errors | keyvalue">
+        <div *ngFor="let error of ngControl.errors | keyvalue">
             <div [ngSwitch]="error.key">
                 <div *ngSwitchCase="'required'">{{ name | titlecase }} is required</div>
                 <div *ngSwitchDefault>{{ error.value }}</div>

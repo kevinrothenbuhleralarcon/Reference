@@ -1,4 +1,4 @@
-import {Component, Injector, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Injector, Input, OnInit, Self, ViewChild} from '@angular/core';
 import {
     ControlValueAccessor,
     FormControl, FormControlDirective,
@@ -11,15 +11,8 @@ import {
 @Component({
     selector: 'app-input-with-errors',
     templateUrl: './input-with-errors.component.html',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            multi: true,
-            useExisting: InputWithErrorsComponent
-        }
-    ]
 })
-export class InputWithErrorsComponent implements ControlValueAccessor, OnInit {
+export class InputWithErrorsComponent implements ControlValueAccessor {
 
     @Input()
     label: string = '';
@@ -30,38 +23,22 @@ export class InputWithErrorsComponent implements ControlValueAccessor, OnInit {
     @Input()
     type: string = 'text';
 
-    formControl!: FormControl;
+    @ViewChild('input', {static: true})
+    input!: ElementRef;
 
-    private onChange = (inputValue: string) => {
+    onChange = (inputValue: string) => {
     };
 
-    private onTouched = () => {
+    onTouched = () => {
     };
 
-    private touched = false;
-
-    constructor(private injector: Injector) {
-    }
-
-    ngOnInit(): void {
-        const ngControl = this.injector.get(NgControl);
-
-        if (ngControl instanceof FormControlName) {
-            this.formControl = this.injector
-                    .get(FormGroupDirective)
-                    .getControl(ngControl);
-        } else {
-            this.formControl = (ngControl as FormControlDirective).form as FormControl;
-        }
-    }
-
-    handleChange() {
-        this.markAsTouched();
-        this.onChange(this.formControl.value);
+    constructor(@Self() public ngControl: NgControl) {
+        ngControl.valueAccessor = this;
     }
 
     writeValue(value: string): void {
-        this.formControl.setValue(value);
+        // this.formControl.setValue(value);
+        this.input.nativeElement.value = value;
     }
 
     registerOnChange(onChange: (value: string) => void): void {
@@ -70,12 +47,5 @@ export class InputWithErrorsComponent implements ControlValueAccessor, OnInit {
 
     registerOnTouched(onTouched: () => void): void {
         this.onTouched = onTouched;
-    }
-
-    private markAsTouched(): void {
-        if (!this.touched) {
-            this.touched = true;
-            this.onTouched();
-        }
     }
 }
