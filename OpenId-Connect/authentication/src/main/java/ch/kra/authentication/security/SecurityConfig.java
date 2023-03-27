@@ -14,13 +14,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests()
-                .requestMatchers("/", "/index.html").permitAll()
-                .anyRequest().authenticated()
+                .headers().frameOptions().disable()
                 .and()
-                .oauth2Login()
+                .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/h2/**").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                .requestMatchers("/", "/index.html").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .oauth2Login()
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 }

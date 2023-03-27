@@ -21,6 +21,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NotEqualFields(baseField = "firstName", matchField = "lastName", message = "Last name cannot be the same as first name")
 public class User {
     private static final int MIN_LENGTH = 2;
     private static final int MIN_LENGTH_USERNAME = 7;
@@ -31,7 +32,6 @@ public class User {
 
     @NotBlank(message = "Last name cannot be blank")
     @Size(min = MIN_LENGTH, message = "Last name should be at least "+ MIN_LENGTH +" character long")
-    @NotEqualFields(baseField = "firstName", matchField = "lastName", message = "Last name cannot be the same as first name")
     private String lastName;
 
     @NotBlank(message = "Username cannot be blank")
