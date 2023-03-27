@@ -5,20 +5,26 @@
             [type]="type"
             [name]="name"
             [id]="name"
-            class="form-control"
+            [ngClass]="{
+                'form-control': true,
+                'is-invalid': ngControl?.touched && ngControl?.invalid
+            }"
             #input
             (input)="onChange(input.value)"
             (blur)="onTouched()">
 
+    <!--    <div-->
+    <!--            class="alert alert-danger"-->
+    <!--            *ngIf="ngControl?.touched && ngControl?.invalid"-->
+    <!--    >-->
     <div
-            class="alert alert-danger"
-            *ngIf="ngControl?.touched && ngControl?.invalid"
+            class="invalid-feedback"
+            *ngFor="let error of ngControl?.errors! | keyvalue"
     >
-        <div *ngFor="let error of ngControl?.errors! | keyvalue">
-            <div [ngSwitch]="error.key">
-                <div *ngSwitchCase="'required'">{{ name | titlecase }} is required</div>
-                <div *ngSwitchDefault>{{ error.value }}</div>
-            </div>
+
+        <div [ngSwitch]="error.key">
+            <div *ngSwitchCase="'required'">{{ name | titlecase }} is required</div>
+            <div *ngSwitchDefault>{{ error.value }}</div>
         </div>
     </div>
 </div>
