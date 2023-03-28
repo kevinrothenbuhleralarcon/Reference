@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@PasswordMatches(baseField = "password", matchField = "matchingPassword", message = "Passwords don't match")
 public class SignupRequest {
 
     private Long userID;
@@ -23,13 +24,12 @@ public class SignupRequest {
     @NotEmpty
     private String email;
 
-    private AuthenticationProvider authenticationProvider;
+    private AuthenticationProvider provider;
 
     @Size(min = 6, message = "{Size.userDto.password}")
     private String password;
 
     @NotEmpty
-    @PasswordMatches(baseField = "password", matchField = "matchingPassword", message = "Passwords don't match")
     private String matchingPassword;
 
 //    public SignupRequest(String providerUserId, String displayName, String email, String password, AuthenticationProvider authenticationProvider) {

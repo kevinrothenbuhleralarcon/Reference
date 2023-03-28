@@ -1,4 +1,4 @@
-package ch.kra.authentication.security;
+package ch.kra.authentication.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,20 +14,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http
-                .headers().frameOptions().disable()
-                .and()
+                .cors()
+                    .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/h2/**").permitAll()
-                .anyRequest().permitAll()
+                .requestMatchers("/", "/error", "api/all", "api/auth", "/h2/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//                .requestMatchers("/", "/index.html").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .oauth2Login()
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .oauth2Login();
         return http.build();
     }
 }

@@ -11,25 +11,40 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     private String baseField;
     private String matchField;
+    private String message;
 
     @Override
     public void initialize(PasswordMatches constraint) {
         baseField = constraint.baseField();
         matchField = constraint.matchField();
+        message = constraint.message();
     }
 
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
+        boolean isValid;
         try {
             Object baseFieldValue = getFieldValue(object, baseField);
             Object matchFieldValue = getFieldValue(object, matchField);
             if (Objects.isNull(baseFieldValue) && Objects.isNull(matchFieldValue)) {
-                return true;
+                isValid = true;
+            } else {
+                isValid = baseFieldValue.equals(matchFieldValue);
             }
-            return !baseFieldValue.equals(matchFieldValue);
         } catch (Exception e) {
-            return false;
+            isValid = false;
         }
+
+        if (!isValid) {
+            constraintValidatorContext.disableDefaultConstraintViolation(); // so the error is not linked to the class
+
+            // Assign the constraint violation on the matching field
+            constraintValidatorContext.buildConstraintViolationWithTemplate(message)
+                    .addPropertyNode(baseField)
+                    .addConstraintViolation();
+        }
+
+        return isValid;
     }
 
     private Object getFieldValue(Object object, String fieldName) throws Exception {
