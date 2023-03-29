@@ -3,8 +3,8 @@ package ch.kra.authentication.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
+@Getter
 public enum AuthenticationProvider {
     GOOGLE("google"),
     LOCAL("local");

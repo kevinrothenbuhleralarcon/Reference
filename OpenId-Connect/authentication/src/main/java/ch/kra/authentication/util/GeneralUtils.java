@@ -22,7 +22,7 @@ public class GeneralUtils {
         return authorities;
     }
 
-    public static AuthenticationProvider toSocialProvider(String providerId) {
+    public static AuthenticationProvider getAuthenticationProvider(String providerId) {
         for (AuthenticationProvider authenticationProvider : AuthenticationProvider.values()) {
             if (authenticationProvider.getProviderType().equals(providerId)) {
                 return authenticationProvider;
