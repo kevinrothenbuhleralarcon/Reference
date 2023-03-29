@@ -11,15 +11,12 @@ import ch.kra.authentication.repository.RoleRepository;
 import ch.kra.authentication.repository.UserRepository;
 import ch.kra.authentication.security.oauth2.OAuth2UserInfo;
 import ch.kra.authentication.security.oauth2.OAuth2UserInfoFactory;
-import ch.kra.authentication.util.GeneralUtils;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Calendar;
@@ -50,7 +47,6 @@ public class UserServiceImpl implements UserService {
         user.setCreatedDate(now);
         user.setModifiedDate(now);
         user = userRepository.save(user);
-        userRepository.flush();
         return user;
     }
 
@@ -60,6 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional // Needed here otherwise the lazy loading of the roles is not done dirung the findUserByEmail and so we cannot access the roles of the user later
     public LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo) {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, attributes);
         if (!StringUtils.hasLength(oAuth2UserInfo.getName())) {

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.http.HttpResponse;
@@ -19,10 +20,16 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     private final Environment env;
     private final UserService userService;
+
+    @GetMapping("/")
+    public ResponseEntity<?> home() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @GetMapping("/oauth2-credentials")
     public ResponseEntity<Map<String, String>> getOAuth2Credentials() {
@@ -33,7 +40,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity test() {
+    public ResponseEntity<?> test() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
