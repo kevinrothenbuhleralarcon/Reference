@@ -31,18 +31,13 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/oauth2-credentials")
-    public ResponseEntity<Map<String, String>> getOAuth2Credentials() {
-        Map<String, String> credentials = new HashMap<>();
-        credentials.put("clientId", env.getProperty("spring.security.oauth2.client.registration.google.client-id"));
-        credentials.put("issuerUri", env.getProperty("spring.security.oauth2.client.provider.google.issuer-uri"));
-        return ResponseEntity.ok(credentials);
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @GetMapping("/oauth2-credentials")
+//    public ResponseEntity<Map<String, String>> getOAuth2Credentials() {
+//        Map<String, String> credentials = new HashMap<>();
+//        credentials.put("clientId", env.getProperty("spring.security.oauth2.client.registration.google.client-id"));
+//        credentials.put("issuerUri", env.getProperty("spring.security.oauth2.client.provider.google.issuer-uri"));
+//        return ResponseEntity.ok(credentials);
+//    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
