@@ -1,10 +1,14 @@
 package ch.kra.authentication.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.util.SerializationUtils;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -45,11 +49,15 @@ public class CookieUtils {
         }
     }
 
-    public static String serialize(Object object) {
+    public static String encrypt(Object object) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         return Base64.getUrlEncoder().encodeToString(SerializationUtils.serialize(object));
     }
 
-    public static <T> T deserialize(Cookie cookie, Class<T> cls) {
-        return cls.cast(SerializationUtils.deserialize(Base64.getUrlDecoder().decode(cookie.getValue())));
+    public static OAuth2AuthorizationRequest decrypt(Cookie cookie) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+//        return mapper.readValue(Base64.getUrlDecoder().decode(cookie.getValue()), OAuth2AuthorizationRequest.class);
+        // Need to find a non deprecated alternative
+        return (OAuth2AuthorizationRequest) (SerializationUtils.deserialize(Base64.getUrlDecoder().decode(cookie.getValue())));
     }
 }

@@ -8,6 +8,10 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/*
+ * DTO for a regular login
+ */
+
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -36,12 +40,4 @@ public class SignupRequest {
 
     @NotEmpty
     private String matchingPassword;
-
-//    public SignupRequest(String providerUserId, String displayName, String email, String password, AuthenticationProvider authenticationProvider) {
-//        this.providerUserId = providerUserId;
-//        this.displayName = displayName;
-//        this.email = email;
-//        this.password = password;
-//        this.authenticationProvider = authenticationProvider;
-//    }
 }

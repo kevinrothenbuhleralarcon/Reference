@@ -1,26 +1,19 @@
 package ch.kra.authentication.security.config;
 
 import ch.kra.authentication.security.filter.JWTAuthorizationFilter;
-import ch.kra.authentication.security.jwt.TokenProviderService;
 import ch.kra.authentication.security.oauth2.CookieAuthorizationRequestRepository;
 import ch.kra.authentication.security.oauth2.CustomOidcUserService;
+import ch.kra.authentication.security.oauth2.OAuth2AuthenticationFailureHandler;
 import ch.kra.authentication.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
-import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
-import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @AllArgsConstructor
@@ -31,6 +24,7 @@ public class SecurityConfig {
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
     private final CookieAuthorizationRequestRepository cookieAuthorizationRequestRepository;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     @Bean
 //    @Order(1) // not used bo kept for example in case we use the other bean
@@ -44,6 +38,7 @@ public class SecurityConfig {
 //                .requestMatchers(new AntPathRequestMatcher("/h2/**")).permitAll();
 
         http
+//                .securityMatcher("/auth/**", "/oauth2/**")
                 .cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .csrf().disable()
@@ -61,7 +56,7 @@ public class SecurityConfig {
                      * As this service is stateless, we need to save it manually.
                      */
                     .authorizationEndpoint()
-//                        .authorizationRequestRepository(cookieAuthorizationRequestRepository)
+                        .authorizationRequestRepository(cookieAuthorizationRequestRepository)
                         .and()
                     .userInfoEndpoint()
                         .oidcUserService(customOidcUserService) // To manage what we receive from OIDC Provider (ex Google https://en.wikipedia.org/wiki/List_of_OAuth_providers)
@@ -69,7 +64,8 @@ public class SecurityConfig {
 //                    .tokenEndpoint()
 //                            .accessTokenResponseClient() // In case we need to do something special with the token (in case of linkedin login for example, we need to retrieve the token type).
                         .and()
-                    .successHandler(oAuth2AuthenticationSuccessHandler);
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
+                    .failureHandler(oAuth2AuthenticationFailureHandler);
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
