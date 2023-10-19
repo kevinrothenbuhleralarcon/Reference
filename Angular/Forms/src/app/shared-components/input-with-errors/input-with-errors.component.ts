@@ -1,6 +1,6 @@
 import {Component, ElementRef, Injector, Input, OnInit, Optional, Self, ViewChild} from '@angular/core';
 import {
-    ControlValueAccessor,
+    ControlValueAccessor, FormBuilder,
     FormControl, FormControlDirective,
     FormControlName,
     FormGroupDirective,
