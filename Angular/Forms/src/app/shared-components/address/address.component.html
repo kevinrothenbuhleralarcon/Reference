@@ -1,11 +1,11 @@
-<section [formGroup]="addressForm">
+<fieldset [formGroupName]="controlKey">
+    <legend>{{label}}</legend>
     <app-input-with-errors
             formControlName="street"
             label="Street"
             name="street"
             id="street"
             type="text"
-            (blur)="onTouched()"
     ></app-input-with-errors>
 
     <app-input-with-errors
@@ -14,7 +14,6 @@
             name="city"
             id="city"
             type="text"
-            (blur)="onTouched()"
     ></app-input-with-errors>
 
     <app-input-with-errors
@@ -23,6 +22,5 @@
             name="zip"
             id="zip"
             type="text"
-            (blur)="onTouched()"
     ></app-input-with-errors>
-</section>
+</fieldset>

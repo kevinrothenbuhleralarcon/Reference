@@ -7,7 +7,7 @@
             [id]="name"
             [ngClass]="{
                 'form-control': true,
-                'is-invalid': ngControl?.touched && ngControl?.invalid
+                'is-invalid': ngControl.touched && ngControl.invalid
             }"
             #input
             (input)="onChange(input.value)"
@@ -19,7 +19,7 @@
     <!--    >-->
     <div
             class="invalid-feedback"
-            *ngFor="let error of ngControl?.errors! | keyvalue"
+            *ngFor="let error of ngControl.errors! | keyvalue"
     >
 
         <div [ngSwitch]="error.key">
